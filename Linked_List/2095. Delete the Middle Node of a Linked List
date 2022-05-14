@@ -1,0 +1,43 @@
+You are given the head of a linked list. Delete the middle node, and return the head of the modified linked list.
+
+The middle node of a linked list of size n is the ⌊n / 2⌋th node from the start using 0-based indexing, where ⌊x⌋ denotes the largest integer less than or equal to x.
+
+For n = 1, 2, 3, 4, and 5, the middle nodes are 0, 1, 1, 2, and 2, respectively.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+int findLen(struct ListNode* root){
+    int count=0;
+    while(root!=NULL){
+        count++;
+        root=root->next;
+    }
+    return count;
+}
+
+struct ListNode* deleteMiddle(struct ListNode* head){
+   int len=findLen(head);
+   int mid=len/2;
+   struct ListNode* temp=head;
+    if(len==1){
+        head=NULL;
+    }else if(len==2){
+        head->next=NULL;
+    }else if(len==3){
+        head->next=head->next->next;
+    }else{
+        while(mid>1){
+       temp=temp->next;
+       mid--;
+   }
+    temp->next=temp->next->next;
+    }
+   
+    return head;
+}
